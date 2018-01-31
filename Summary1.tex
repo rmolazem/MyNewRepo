@@ -1,0 +1,114 @@
+\documentclass[12pt, letterpaper]{article}
+\usepackage[utf8]{inputenc}
+\title{Vector Representation of Light Transport}
+\author{Ronak Molazem}
+\newcounter{definition}[section]
+%Defining a new numbered environment "definition"
+\newenvironment{definition}[1][]{\refstepcounter{definition}\par\medskip\noindent\textbf{Definition~\thedefinition.#1}\rmfamily}{medskip}
+\usepackage{dirtytalk}
+\usepackage{mathptmx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{helvet}
+\usepackage{courier}
+\usepackage{makeidx}
+\usepackage{graphicx}
+\usepackage[bottom]{footmisc}
+\usepackage{makeidx}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\begin{titlepage}
+\maketitle
+\end{titlepage}
+
+\section{Linear Algebra}
+\subsection{Fundamental Expansion Postulate}
+\label{subsec:1}
+\begin{definition}
+The family $\{\phi_{k}\}_{k=1}^{k=\infty}$ is called \underline{complete} if every piece-wise continuous function can be written as a linear combination of its elements i.e.
+\begin{equation}
+    f(x)=\sum_{i=1}^{\infty}c_{k}\phi_{i}(x)
+\end{equation}
+\end{definition}
+\textbf{First Quantum Postulate}. For every quantum system there exits an (Hermitian)operator that the set of its eigenfunctions forms a complete set for the Hilbert space.
+\\Let $\phi$ be some physical state, by first quantum postulate we know that there is an operator $A_{op}$ such that its eigenfunctions $\{\phi_{i}\}_{i=1}^{i=\infty}$ span $\phi$:
+\begin{equation}
+    \phi(x)=\sum_{i=1}^{\infty}c_{i}\phi_{i}(x)\:\:,\:\:c_{k}=\int_{V}\phi_{k}^{*}(x)\footnote{$\phi_{k}^{*}$ is the complex conjugation of $\phi$.}\phi(x) dv.
+\end{equation}
+\subsection{Matrix Representation of an Operator}
+\label{subsec:2}
+We would like to expand a given function $\phi$ in terms of eigenfunctions $\{\phi_{i}\}_{i=1}^{i=\infty}$  and then find its matrix representation. \\
+To obtain matrix coefficients of $A_{op}$, suppose that $\phi_{a}$ and $\phi_{c}$ indicate the new and previous state of the system respectively. Since any state of the system is contained in the Hilbert space so we have
+\begin{equation}
+    \phi_{c}(x)=\sum_{i=1}^{\infty}c_{i}\phi_{i}(x)\:\:,\:\:\phi_{a}(x)=\sum_{i=1}^{\infty}a_{i}\phi_{i}(x),
+\end{equation}
+now let $\xi_{op}$ to be the matrix representation of $A_{op}$, then 
+\begin{equation}
+\label{eq:matrixCoe}
+\sum_{i=1}^{\infty}a_{i}\phi_{i}(x)= \xi_{op}(\sum_{i=1}^{\infty}c_{i}\phi_{i})
+\end{equation}
+Multiplying the sides of equation (\ref{eq:matrixCoe}) by $\phi_{j}^{*}(x)$ and doing integration on the domain of $x$, $\Omega$, yields right-hand-side of the new equation to be
+\begin{align*}
+\label{}
+    \int_{\Omega}\phi_{j}^{*}(x)\xi_{op}(\sum_{i=1}^{\infty}c_{i}\phi_{i}(x))dx &=\sum_{i=1}^{\infty}\int_{\Omega}a_{i}\phi_{j}^{*}(x)\phi_{i}(x)\\&= \sum_{i=1}^{\infty}a_{i}\int_{\Omega}\phi_{j}^{*}(x)\phi_{i}(x) dx.
+\end{align*}
+\footnote{Note that $\int_{\Omega}\phi_{j}^{*}(x)\phi_{i}(x)$ can be viewed as a inner product of $\phi_{j}^{*}$ and $\phi_{i}$ defined in the Hilbert space.}
+If $\left\{\phi_{i}\right\}_{i=1}^{i=\infty}$ be an orthogonal set of eigenfunctions then  
+\begin{equation}
+ \int_{\Omega}\phi_{j}^{*}(x)\xi_{op}(\sum_{i=1}^{\infty}c_{i}\phi_{i}(x))dx= \sum_{i=1}^{\infty}a_{i}\delta_{ij}= a_{j},
+\end{equation}
+
+so we have:
+\begin{equation}
+\label{eq:5}
+    \sum_{i=1}^{\infty}[\int_{\Omega}\phi_{j}^{*}\xi_{op}\phi_{i}dx]c_{i}=a_{j}
+\end{equation}or\\
+$$a_{j}=\sum_{i=1}^{\infty}\xi_{ji}c_{i}$$\\
+Note that equation (\ref{eq:5}) can be re-expressed in terms of dot product as follows
+\begin{equation}
+    \sum_{i=1}^{\infty}<\phi_{j}^{*},\xi_{op}\phi_{i}> c_{i}= a_{j},
+\end{equation}
+ In the next section we will use this expression more.
+\\On the other hand we should recall that $\left\{\phi_{i}\right\}_{i=1}^{i=\infty}$ are eigenfunctions so coefficients can be obtained easier, i.e.
+\begin{equation}
+\label{eq:6}
+    \xi_{ji}=\int_{\Omega}\phi_{j}^{*}(x)\xi_{op}\phi_{i}(x)dx= \lambda_{i}\int_{\Omega}\phi_{j}^{*}(x)\phi_{i}(x)dx
+\end{equation}
+where $\lambda_{i}$ are eigenvalues. Since we have been supposed $\left\{\phi_{i}\right\}_{i=1}^{i=\infty}$ is an orthogonal basis, then equation (\ref{eq:6}) simplifies to 
+Therefore if we have the eigenvalues, $\xi_{op}$ would be a diagonal matrix witheigenvalues on its diagonal.
+$$\xi_{ji}= \lambda_{i}\delta_{ij}.$$ \footnote{$\delta_{ij}$ indicates Kronecker delta function.}
+
+%%%%%%%%%%%%%%
+\subsection{Vector Representation of Light Transport}
+\label{subsec:3}
+In this section we are going to use the previous framework to the special case of light transport.
+\\First we indicate our Hilbert space precisely. Consider the following vector space
+$\textit{L}=\left \{:\mathbb{R}^{3}\times S\rightarrow\mathbb{R}^{+}
+ : (\int_{\ell}fd\mu)^{\frac{1}{2}} < \infty\right \}=L^{2}(\mathbb{R}^{3}\times S),$\footnote{Lebesgue space}
+\\to be the light distribution space. We define the dot product over $\textit{L}$ as
+\begin{equation}
+    <f_{1},f_{2}>=\iint_{\ell}f_{1}(\mu)f_{2}(\mu)\cos(\theta)d\mu
+\end{equation}
+Let $\left\{\Lambda_{i}\right\}_{i=1}^{\infty}$ be the family of eigenfunctions of light transport, $T$. We are going to express the action of $T$ over some distribution $f_{L}$ in terms of $\Lambda_{i}$. We denote the matrix of light transport acting on $f_{L}$ by $\xi_{L}$.
+\begin{equation}
+    Tf_{L}= \xi_{L}(\sum_{i=1}^{\infty}c_{i}\Lambda_{i}),
+\end{equation}
+Similar to what we did in the previous section resulting equation (\ref{eq:6}); for this case we have
+\begin{equation}
+\label{eq:dualbasis1} 
+\sum_{j=1}^{\infty}\sum_{i=1}^{\infty}<\Lambda_{j}^{*},\xi_{L}\Lambda_{i}> \Lambda_{j}.
+\end{equation}
+Now substituting $\xi_{L}\Lambda_{i}=\lambda_{i}\Lambda_{i}$ in (\ref{eq:dualbasis1}) gives
+\begin{equation}
+    Tf_{L}=\sum_{j=1}^{\infty}\sum_{i=1}^{\infty}\lambda_{i}<\Lambda_{j}^{*},\Lambda_{i}> \Lambda_{j}.
+\end{equation}
+If our eigenvalues are complex, then equation (\ref{eq:dualbasis1}) changes to 
+\begin{equation}
+\label{eq:dualbasis2}
+    Tf_{L}=\sum_{j=1}^{\infty}\sum_{i=1}^{\infty}\overline{\lambda_{i}}<\Lambda_{j}^{*},\Lambda_{i}> \Lambda_{j},
+\end{equation}
+where $\overline{\lambda_{i}}$ indicates the complex conjugation of $\lambda_{i}$.
+\newpage
+\input{refrencTest2.tex}
+\end{document}
